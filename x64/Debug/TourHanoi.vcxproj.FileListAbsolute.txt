@@ -1,1 +1,2 @@
 C:\Users\thoma\Documents\Code\Hiver 2023\Programation 3\FileLabo\TourHanoi\x64\Debug\TourHanoi.exe
+C:\Users\thoma\Documents\Code\Hiver 2023\Programation 3\FileLabo\TourHanoi\HanoiTower\x64\Debug\TourHanoi.exe

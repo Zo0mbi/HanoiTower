@@ -14,15 +14,16 @@ TourHanoi::~TourHanoi(void)
 
 void TourHanoi::affiche()
 {
-	for (int i = tour.size() ; i >= 0; i--)
+	//starting from the other start of the vector
+	for (int i = 0; i < tour.size(); i++)
 	{
-		if (i != 0)
+		if (i != tour.size() - 1)
 		{
 			cout << tour[i] << " - ";
 		}
 		else
 		{
-			cout << tour[i] << endl;
+			cout << tour[i];
 		}
 	}
 }
@@ -39,9 +40,16 @@ void TourHanoi::pop()
 
 void TourHanoi::construireTour(int niveau)
 {
-	for (int i = niveau; i >= 0; i--)
+	for (int i = niveau; i > 0; i--)
 	{
-		tour.push_back(i);
+		/*
+		* Extrait de code soutirer sur StackOverflow
+		* https://stackoverflow.com/a/48251347
+		* Autheur: Ron
+		* Permet de rajouter un element au debut du vector
+		*/
+		tour.insert(tour.begin(),i);
+		//Fin du code emprunter
 	}
 }
 

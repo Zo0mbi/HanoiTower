@@ -43,7 +43,7 @@ void environnementJeux()
 {
 	regle();
 	int niveau{choisirNiveau()};
-	while (tour3.size()!=niveau)
+	while (tour3.size()!=niveau+1)
 	{
 		system("cls"); // clear console
 		printNiveau();
@@ -66,6 +66,9 @@ void jouerTour()
 		cout << "Choisir la tour de destination" << endl;
 		int tourArrivee{ validerNombre() };
 	} while ((!verifierTourArrivee(tourArrivee, tourDepart)));
+	//Deplacement
+	cout << "Deplacement de la tour " << tourDepart << " vers la tour " << tourArrivee << endl;
+	deplacerPiece(tourDepart, tourArrivee);
 	viderConsole();
 }
 //verifier que le nombre est un entier entre 1 et 3 inclus
@@ -84,8 +87,13 @@ int validerNombre()
 int choisirNiveau()
 {
 	int niveau;
-	cout << "Choisir le niveau de difficulte Entre 3 et 10 onclusivement" << endl;
-	cin >> niveau;
+	do
+	{
+		cout << "Choisir le niveau de difficulte Entre 3 et 10 inclusivement" << endl;
+		cin >> niveau;
+	} 
+	while (niveau < 3 || niveau > 10);
+	cout << endl;
 	cout << "Vous avez choisi le niveau " << niveau << endl;
 	tour1.construireTour(niveau);
 	viderConsole();
@@ -96,10 +104,13 @@ void printNiveau()
 {
 	cout << "Tour 1: ";
 	tour1.affiche();
+	cout << endl;
 	cout << "Tour 2: ";
 	tour2.affiche();
+	cout << endl;
 	cout << "Tour 3: ";
 	tour3.affiche();
+	cout << endl;
 }
 //Vide la console
 void viderConsole()
@@ -179,9 +190,23 @@ bool verifierTourDepars(int number)
 //Verifier que la valeur du depars est plus grand que celle de la destination et que 
 bool verifierTourArrivee(int depars, int arriver)
 {
+	//Extrait de code rajouter pour verifier la valeur de la tour.
+	int valeur;
+	if (depars == 1) {
+		valeur = tour1.peek();
+	}
+	else if (depars == 2)
+	{
+		valeur = tour2.peek();
+	}
+	else if (depars == 3)
+	{
+		valeur = tour3.peek();
+	}
+	//Sanity check
 	if (arriver == 1)
 	{
-		if (depars > tour1.peek())
+		if (valeur > tour1.peek())
 		{
 			return true;
 		}
@@ -192,7 +217,7 @@ bool verifierTourArrivee(int depars, int arriver)
 	}
 	if (arriver == 2)
 	{
-		if (depars > tour2.peek())
+		if (valeur > tour2.peek())
 		{
 			return true;
 		}
@@ -203,7 +228,7 @@ bool verifierTourArrivee(int depars, int arriver)
 	}
 	if (arriver == 3)
 	{
-		if (depars > tour3.peek())
+		if (valeur > tour3.peek())
 		{
 			return true;
 		}
