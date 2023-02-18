@@ -21,7 +21,7 @@ void gagner();
 
 void regle();
 
-bool verifierTourDepars(int number);
+bool verifierTourDepart(int number);
 
 bool verifierTourArrivee(int depars, int arriver);
 

@@ -55,21 +55,27 @@ void environnementJeux()
 void jouerTour()
 {
 	int tourDepart;
-	int tourArrivee{ 0 };
+	int tourArrivee;
 	//Verification
 	do {
 		cout << "Choisir la tour de depart" << endl;
 		tourDepart = validerNombre();
-	} while (!verifierTourDepars(tourDepart));
+	} while (!verifierTourDepart(tourDepart));
+
 	//Verification
-	do {
 		cout << "Choisir la tour de destination" << endl;
-		int tourArrivee{ validerNombre() };
-	} while ((!verifierTourArrivee(tourArrivee, tourDepart)));
-	//Deplacement
-	cout << "Deplacement de la tour " << tourDepart << " vers la tour " << tourArrivee << endl;
-	deplacerPiece(tourDepart, tourArrivee);
-	viderConsole();
+		tourArrivee = validerNombre();
+		if (verifierTourArrivee(tourArrivee, tourDepart)) {
+			//Deplacement
+			deplacerPiece(tourDepart, tourArrivee);
+			viderConsole();
+		}
+		else {
+			viderConsole();
+			cout << "Vous ne pouvez pas deplacer une piece plus grande sur une piece plus petite" << endl;
+			printNiveau();
+			jouerTour();
+		}
 }
 //verifier que le nombre est un entier entre 1 et 3 inclus
 int validerNombre()
@@ -151,7 +157,7 @@ void regle()
 	viderConsole();
 }
 //Verifie que la tour de depart n'est pas vide
-bool verifierTourDepars(int number)
+bool verifierTourDepart(int number)
 {
 	if (number == 1)
 	{
@@ -191,7 +197,7 @@ bool verifierTourDepars(int number)
 bool verifierTourArrivee(int depars, int arriver)
 {
 	//Extrait de code rajouter pour verifier la valeur de la tour.
-	int valeur;
+	int valeur{ 0 };
 	if (depars == 1) {
 		valeur = tour1.peek();
 	}
@@ -208,33 +214,33 @@ bool verifierTourArrivee(int depars, int arriver)
 	{
 		if (valeur > tour1.peek())
 		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
-	if (arriver == 2)
+	else if (arriver == 2)
 	{
 		if (valeur > tour2.peek())
 		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
-	if (arriver == 3)
+	else if (arriver == 3)
 	{
 		if (valeur > tour3.peek())
 		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 }
