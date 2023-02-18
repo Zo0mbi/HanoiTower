@@ -1,0 +1,4 @@
+﻿  Main.cpp
+C:\Users\thoma\Documents\Code\Hiver 2023\Programation 3\FileLabo\TourHanoi\Main.cpp(180): warning C4715: 'verifierTourDepars': not all control paths return a value
+C:\Users\thoma\Documents\Code\Hiver 2023\Programation 3\FileLabo\TourHanoi\Main.cpp(217): warning C4715: 'verifierTourArrivee': not all control paths return a value
+  TourHanoi.vcxproj -> C:\Users\thoma\Documents\Code\Hiver 2023\Programation 3\FileLabo\TourHanoi\x64\Debug\TourHanoi.exe
